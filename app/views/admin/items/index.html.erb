@@ -1,2 +1,33 @@
 <h1>Admin::Items#index</h1>
-<p>Find me in app/views/admin/items/index.html.erb</p>
+
+<h4>商品一覧</h4>
+
+<table>
+<thead>
+  <th>商品ID</th>
+  <th>商品名</th>
+  <th>税抜価格</th>
+  <th>ジャンル</th>
+  <th>ステータス</th>
+</thead>
+
+<tbody>
+<% @items.each do |item| %>
+  <tr>
+    <td><%= item.id %></td>
+    <td><%= item.name %></td>
+    <td><%= item.price.to_s(:delimited) %></td>
+    <td><%= item.genre.name %></td>
+    <td>
+      <% if item.is_active == true %>
+        <%= "販売中" %>
+      <% else %>
+        <%= "販売停止中" %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<!--商品ID=id、商品名=name、税抜価格=price、ジャンル=genre_id、ステータス=is_active-->
+

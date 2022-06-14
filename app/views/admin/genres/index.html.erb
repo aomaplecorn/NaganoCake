@@ -4,7 +4,7 @@
 <h4>ジャンル一覧・追加</h4>
 
 <td>ジャンル名</td>
-<%= form_with model: @genre, url: '/admin/genres', method: :post do |f| %>
+<%= form_with model: [:admin,@genre] do |f| %>
 <%= f.text_field :name %>
 <%= f.submit '新規登録' %>
 <% end %>
