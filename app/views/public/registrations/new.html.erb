@@ -1,29 +1,70 @@
-<h2>Sign up</h2>
+<h2>新規会員登録</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 
+<table>
   <div class="field">
-    <%= f.label :email %><br />
+    名前
+    （姓）
+    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+    （名）
+    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
+  </div>
+
+  <div class="field">
+    フリガナ
+    （セイ）
+    <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %>
+    （メイ）
+    <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana" %>
+  </div>
+
+  <div class="field">
+    <!--<a%= f.label :email %><br />-->
+    メールアドレス
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
+    郵便番号（ハイフンなし）
+    <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
+  </div>
+
+  <div class="field">
+    住所
+    <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
+  </div>
+
+  <div class="field">
+    電話番号（ハイフンなし）
+    <%= f.telephone_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
+  </div>
+
+  <div class="field">
+    <!--<a%= f.label :password %>-->
+    パスワード（６文字以上）
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <!--<a%= f.label :password_confirmation %><br />-->
+    パスワード（確認用）
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規会員登録" %>
   </div>
 <% end %>
 
-<%= render "public/shared/links" %>
+</table>
+
+<h4>既に登録済みの方</h4>
+<p><%= link_to "こちら", '/customers/sign_in' %>からログインしてください。</p>
+
+
+
+
+
+

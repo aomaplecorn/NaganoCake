@@ -15,8 +15,8 @@
 <li>税抜価格
   <%= f.number_field :price %>円</li>
 <li>販売ステータス
-  <%= f.radio_button :is_active, true %><%= f.label :is_active_1, '販売中' %>
-  <%= f.radio_button :is_active, false %><%= f.label :is_active_2, '販売停止中' %></li>
+  <%= f.radio_button :is_active, true %><%= f.label :is_active_1, "販売中" %>
+  <%= f.radio_button :is_active, false %><%= f.label :is_active_2, "販売停止中" %></li>
 
   <%= f.submit '変更を保存' %>
 </tr>

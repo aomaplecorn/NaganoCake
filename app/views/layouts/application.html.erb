@@ -16,10 +16,10 @@
     <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
     </li>
 
-    <!--<a% elsif customer_signed_in? %>-->
-    <!--<li>-->
-    <!--<a%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>-->
-    <!--</li>-->
+    <% elsif customer_signed_in? %>
+    <li>
+    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+    </li>
 
     <% end %>
 
