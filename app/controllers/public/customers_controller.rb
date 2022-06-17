@@ -1,16 +1,28 @@
 class Public::CustomersController < ApplicationController
   def show
-  end
-
-  def edit
-  end
-
-  def update
+    @customer = current_customer
   end
 
   def check
+    @customer = current_customer
   end
 
   def withdraw
+    @customer = current_customer
+    if @customer.update(is_deleted: true)
+      reset_session
+      redirect_to "/"
+    else
+      render :check
+    end
   end
+
+  private
+
+  def customers_params
+    params.require(:customers).permit(:email, :last_name,:first_name,:last_name_kana,:first_name_kana,:postal_code,:address,:telephone_number)
+  end
+  # def is_deleted_params
+  #   params.require(:customers).permit(:is_deleted)
+  # end
 end
