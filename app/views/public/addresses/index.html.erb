@@ -4,7 +4,7 @@
 
 <%= form_with model: [:public,@address] do |f| %>
 
-<%= f.hidden_field :customer_id, :value => current_customer.id %>
+
 
 <p>郵便番号（ハイフンなし）
   <%= f.text_field :postal_code %>
@@ -32,6 +32,7 @@
   <tbody>
     <% @addresses.each do |address| %>
     <tr>
+      <td><%= address.customer_id %></td>
       <td><%= address.postal_code %></td>
       <td><%= address.address %></td>
       <td><%= address.name %></td>
