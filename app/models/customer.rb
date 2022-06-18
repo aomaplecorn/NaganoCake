@@ -4,8 +4,7 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-
-
+  has_many :addresses
 
   def update_without_current_password(params, *options)
     params.delete(:current_password)

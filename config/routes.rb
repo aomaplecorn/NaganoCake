@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-
-
-  namespace :public do
-    get 'addresses/index'
-    get 'addresses/edit'
-  end
   root to: "public/homes#top"
   get "/about" => "public/homes#about"
 
@@ -27,7 +21,9 @@ Rails.application.routes.draw do
   get 'customers/mypage' => 'customers#show', as: 'mypage'
   get 'customers/check' => 'customers#check', as: 'check'
   patch 'customers/withdraw' => 'customers#withdraw'
-  # ここまで、customers
+  # 以下、addresses
+  resources :addresses, only: [:index,:create, :edit, :update, :destroy]
+
 
 
   end
