@@ -18,9 +18,31 @@
 
     <% elsif customer_signed_in? %>
     <li>
+    <%= link_to "マイページ", public_mypage_path %>
+    </li>
+    <li>
+    <%= link_to "商品一覧", public_items_path %>
+    </li>
+    <li>
+    <%= link_to "カート", public_cart_items_path %>
+    </li>
+    <li>
     <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
     </li>
 
+    <% else %>
+    <li>
+      <%= link_to "About", about_path %>
+    </li>
+    <li>
+      <%= link_to "商品一覧", public_items_path %>
+    </li>
+    <li>
+      <%= link_to "新規登録", '/customers/sign_up' %>
+    </li>
+    <li>
+      <%= link_to "ログイン", '/customers/sign_in' %>
+    </li>
     <% end %>
 
     <%= yield %>

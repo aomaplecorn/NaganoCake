@@ -5,6 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :addresses
+  has_many :cart_items
 
   def update_without_current_password(params, *options)
     params.delete(:current_password)

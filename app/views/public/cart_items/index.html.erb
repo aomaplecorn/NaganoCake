@@ -1,0 +1,49 @@
+<h1>Public::CartItems#index</h1>
+
+<h3>ショッピングカート</h3>
+<%= link_to "カートを空にする", public_cart_items_destroy_all_path, method: :delete %>
+<!--<a%= link_to "削除する", public_cart_item_path(cart_item.id), method: :delete %>-->
+
+<table>
+    <thead>
+        <tr>
+            <td>商品名</td>
+            <td>単価（税込）</td>
+            <td>数量</td>
+            <td>小計</td>
+            <td colspan=3></td>
+        </tr>
+    </thead>
+    <tbody>
+        <% @cart_items.each do |cart_item| %>
+        <tr>
+            <td>
+                <%= link_to public_item_path(cart_item.item_id) do %>
+                    <%= image_tag cart_item.item.get_image(60,40) %>
+                <% end %>
+                <%= cart_item.item.name %>
+            </td>
+            <td>
+                <%= cart_item.item.add_tax_price.to_s(:delimited) %>
+            </td>
+        <%= form_with model: @cart_item, url: public_cart_item_path(cart_item.id), method: :patch do |f| %>
+            <td>
+                <%= f.select :amount, *[1..10], prompt: "#{cart_item.amount}" %>
+                <%= f.submit "変更" %>
+            </td>
+        <% end %>
+            <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+            <% @total_price += cart_item.subtotal %>
+            <td>
+                <%= link_to "削除する", public_cart_item_path(cart_item.id), method: :delete %>
+            </td>
+        </tr>
+        <% end %>
+
+    </tbody>
+</table>
+
+<div>
+    <p>合計金額</p>
+    <p><%= @total_price.round.to_s(:delimited) %></p>
+</div>

@@ -1,0 +1,19 @@
+<h1>Public::Items#show</h1>
+
+<%= image_tag @item.get_image(600,400) %>
+
+<h2><%= @item.name %></h2>
+<p><%= @item.introduction %></p>
+<p><strong>¥<%= @item.add_tax_price.to_s(:delimited) %></strong>（税込）</p>
+
+<%= form_with model: [:public,@cart_item] do |f| %>
+  <%= f.hidden_field :item_id, :value => @item.id %>
+  <%= f.select :amount, *[1..10], prompt: "個数選択" %>
+  <%= f.submit "カートに入れる" %>
+<% end %>
+
+
+
+
+
+
