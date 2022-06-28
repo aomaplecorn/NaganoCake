@@ -5,14 +5,14 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     # カートアイテムが空かどうか判定　カートアイテムが　有る　場合の処理
-    if current_customer.cart_items == nil
+    if current_customer.cart_items != nil
       @order = Order.new(order_params)
       @order.customer_id = current_customer.id
       # confirm画面の金額表示を用意
       @cart_items = current_customer.cart_items
       # カート内の合計金額を格納
       @total_price = @cart_items.inject(0) { |total, item| total + item.subtotal }
-      # 送料（shipping_cost）を定義し、格納
+      # 送料（shipping_cost）を格納
       @order.shipping_cost = 800
       # カート内の合計金額＋送料　を　請求金額(total_payment)へ格納
       @order.total_payment = @total_price + @order.shipping_cost
@@ -43,17 +43,11 @@ class Public::OrdersController < ApplicationController
     end
   end
 
-    # 以下、変数まとめ
-      #  customer_id＝会員ID、posta_code＝郵便番号、address＝住所、name＝宛名、shipping_cost＝送料、
-      #  total_payment＝請求額、payment_method＝支払方法、status＝受注ステータス
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
 
     if @order.save
-
-          binding.pry # @orderから情報が消えていないかテスト
-
   # ユーザーのカートアイテムを変数（cart_item）へ格納
       cart_items = current_customer.cart_items.all
   # カート情報をもとに、注文詳細（OrderDetail）を作成し保存
@@ -66,21 +60,24 @@ class Public::OrdersController < ApplicationController
         order_detail.save
       end
       cart_items.destroy_all
-      redirect_to complete_path
+      redirect_to public_complete_path
     else
       render :new
     end
   end
 
-
-
   # 注文履歴一覧
   def index
-    @orders = Order.all
+    @orders = current_customer.orders
   end
 
   # 注文履歴詳細
   def show
+    @order = Order.find(params[:id])
+    @order_details = OrderDetail.all
+  # 商品合計を逆算
+    @total_price = @order.total_payment - @order.shipping_cost
+
   end
 
   private
@@ -88,7 +85,17 @@ class Public::OrdersController < ApplicationController
     params.require(:order).permit(:customer_id, :postal_code, :address, :name, :shipping_cost, :total_payment, :payment_method, :status)
   end
 
-
 end
+
+
+# 以下、Orderのカラムまとめ
+  #  customer_id＝会員ID、posta_code＝郵便番号、address＝住所、name＝宛名、shipping_cost＝送料、
+  #  total_payment＝請求額、payment_method＝支払方法、status＝受注ステータス
+
+# 以下、OrderDetailのカラムまとめ
+  #  item_id＝商品ID、order_id＝注文ID
+  #  price＝購入時価格（税込）、amount＝数量、making_status＝製作ステータス
+
+
 
 

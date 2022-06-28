@@ -15,7 +15,7 @@
 
 
 <!--新着商品、商品名、値段　＃商品詳細へ飛ぶ-->
-<!--order(created_at: :desc).-->
+<h1>新着商品</h1>
 <% Item.all.order(created_at: :desc).each do |item| %>
 <%= image_tag item.get_image(100,100) %>
 <%= item.name %>

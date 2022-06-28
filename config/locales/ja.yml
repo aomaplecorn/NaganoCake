@@ -6,8 +6,11 @@ ja:
       payment_method:
         credit_card: "クレジットカード"
         transfer: "銀行振込"
-
-
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      YMD: "%Y/%m/%d"
+      HMS: "%H:%M:%S"
 
 
 
