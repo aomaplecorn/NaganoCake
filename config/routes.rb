@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-
-
   root to: "public/homes#top"
   get "/about" => "public/homes#about", as: "about"
 
@@ -30,7 +28,10 @@ Rails.application.routes.draw do
   # 以下、cart_items
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :cart_items, only: [:index, :create, :update, :destroy]
-
+  # 以下、orders
+    get 'orders/complete' => 'orders#complete', as: 'complete'
+    resources :orders, only: [:new, :create, :index, :show]
+    post 'orders/confirm' => 'orders#confirm', as: 'confirm'
 
   end
 

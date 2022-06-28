@@ -9,7 +9,7 @@ class Public::CartItemsController < ApplicationController
   def create
     @cart_item = CartItem.new(cart_item_params)
     @cart_item.customer_id = current_customer.id
-    # カート内にある同じアイテムのレコードを取得
+    # カート内にある同じアイテムのレコードを取得し、既存のカートアイテム（existing_cart_item）へ格納
     @existing_cart_item = current_customer.cart_items.find_by(item_id: @cart_item.item_id)
     # カート内に同じアイテムがない場合、レコードを新規作成する
     if @existing_cart_item == nil
