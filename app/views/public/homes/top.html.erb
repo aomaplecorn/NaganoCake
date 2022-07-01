@@ -1,8 +1,9 @@
 <h1>Public::Homes#top</h1>
 
 <!--ジャンル検索＃商品一覧へ飛ぶ-->
-
-
+<div class="sidebar">
+  <%= render 'public/genres/sidebar' %>
+</div>
 <!--画面中央-->
 <div>
   <p>
@@ -13,12 +14,26 @@
   </p>
 </div>
 
-
 <!--新着商品、商品名、値段　＃商品詳細へ飛ぶ-->
-<h1>新着商品</h1>
-<% Item.all.order(created_at: :desc).each do |item| %>
-<%= image_tag item.get_image(100,100) %>
-<%= item.name %>
-¥<%= item.price.to_s(:delimited) %>
-<% end %>
+<div>
+  <h1>新着商品</h1>
+    <table>
+      <tbody>
+        <tr>
+          <% @items.order(created_at: :desc).each do |item| %>
+          <td>
+              <%= link_to public_item_path(item.id) do %>
+                <%= image_tag item.get_image(100,100) %></br>
+                <%= item.name %></br>
+                ¥<%= item.price.to_s(:delimited) %>
+              <% end %>
+          </td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+<div><%= link_to "全ての商品を見る >", public_items_path %></div>
+
 

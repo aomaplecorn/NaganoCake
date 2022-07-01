@@ -1,0 +1,12 @@
+
+
+<strong>ジャンル検索</strong>
+<% genres = Genre.all %>
+<% genres.each do |genre| %>
+  <%= link_to public_genre_path(genre.id) do %>
+    <div><%= genre.name %></div>
+  <% end %>
+<% end %>
+
+
+

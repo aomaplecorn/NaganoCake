@@ -1,0 +1,29 @@
+<h1>Public::Genres#show</h1>
+
+
+<div class="item-index-box">
+
+    <!-- ジャンル選択のサイドバー -->
+    <%= render "sidebar" %>
+    <!-- ジャンル選択のサイドバー -->
+    <div class="item-index">
+    <h3><%= @genre.name %>一覧</h3><p>（全<%= @genre.items.count %>件）</p>
+        <table>
+          <tbody>
+            <tr class="item-box">
+              <% @genre.items.each do |item| %>
+                <td class="item">
+                    <%= link_to public_item_path(item.id) do %>
+                      <%= image_tag item.get_image(400,200) %><br>
+                      <%= item.name %><br>
+                      ¥<%= item.add_tax_price.round.to_s(:delimited) %>
+                    <% end %>
+                </td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>
+
+

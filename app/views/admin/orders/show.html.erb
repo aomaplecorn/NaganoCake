@@ -1,0 +1,85 @@
+<h1>Admin::Orders#show</h1>
+
+<h3>注文履歴詳細</h3>
+
+<table>
+    <tr>
+        <th>購入者</th>
+        <td><%= @order.customer.last_name + @order.customer.first_name %></td>
+    </tr>
+    <tr>
+        <th>注文日</th>
+        <td><%= l @order.created_at, format: :YMD %></td>
+    </tr>
+    <tr>
+        <th>配送先</th>
+        <td><%= '〒' + @order.postal_code + ' ' + @order.address %></br>
+            <%= @order.name %></td>
+    </tr>
+    <tr>
+        <th>支払方法</th>
+        <td><%= @order.payment_method_i18n %></td>
+    </tr>
+
+    <tr>
+        <th>注文ステータス</th>
+    <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch do |f| %>
+        <td><%= f.select :status, Order.statuses_i18n.values, prompt: "#{@order.status}" %></td>
+        <td><%= f.submit '更新' %></td>
+    <% end %>
+<!--Order.statues.keys.to_i ,-->
+    <!--Order.find(params[:status])-->
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>商品名</th>
+        <th>単価（税込）</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th>製作ステータス</th>
+        <th colspan="3"></th>
+    </tr>
+<% @order_details.each do |order_detail| %>
+    <% if @order.id == order_detail.order_id %>
+    <tr>
+        <td><%= order_detail.item.name %></td>
+        <td><%= order_detail.item.add_tax_price %></td>
+        <td><%= order_detail.amount %></td>
+        <td><%= order_detail.subtotal.round.to_s(:delimited) %></td>
+    <%= form_with model: order_detail, url: 'admin/order_details', method: :update do |f| %>
+        <td><%= f.select :making_status, OrderDetail.making_statuses_i18n.values, prompt: "#{order_detail.making_status}" %></td>
+        <td><%= f.submit "更新" %></td>
+    <% end %>
+    </tr>
+    <% end %>
+<% end %>
+
+</table>
+
+<table style="float:right;">
+    <tr>
+        <th>商品合計</th>
+        <td><%= @total_price.round.to_s(:delimited) %>円</td>
+    </tr>
+    <tr>
+        <th>送料</th>
+        <td><%= @order.shipping_cost.round.to_s(:delimited) %>円</td>
+    </tr>
+    <tr>
+        <th>請求金額合計</th>
+        <td><%= @order.total_payment.round.to_s(:delimited) %>円</td>
+    </tr>
+</table>
+
+<!--# 以下、Orderのカラムまとめ-->
+<!--  #  customer_id＝会員ID、postal_code＝郵便番号、address＝住所、name＝宛名、shipping_cost＝送料、-->
+<!--  #  total_payment＝請求額、payment_method＝支払方法、status＝受注ステータス-->
+
+<!--# 以下、OrderDetailのカラムまとめ-->
+<!--  #  item_id＝商品ID、order_id＝注文ID-->
+<!--  #  price＝購入時価格（税込）、amount＝数量、making_status＝製作ステータス-->
+
+
+

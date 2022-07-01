@@ -1,0 +1,20 @@
+<h1>Admin::Orders#index</h1>
+
+<% @orders.each do |order| %>
+<h3><%= order.customer.last_name + order.customer.first_name %></h3>
+<% end %>
+
+
+
+
+
+<%= paginate @orders %>
+
+<!--# 以下、Orderのカラムまとめ-->
+<!--  #  customer_id＝会員ID、postal_code＝郵便番号、address＝住所、name＝宛名、shipping_cost＝送料、-->
+<!--  #  total_payment＝請求額、payment_method＝支払方法、status＝受注ステータス-->
+
+<!--# 以下、OrderDetailのカラムまとめ-->
+<!--  #  item_id＝商品ID、order_id＝注文ID-->
+<!--  #  price＝購入時価格（税込）、amount＝数量、making_status＝製作ステータス-->
+

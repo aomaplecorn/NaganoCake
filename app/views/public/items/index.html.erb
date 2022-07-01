@@ -1,21 +1,22 @@
 <h1>Public::Items#index</h1>
 
+<%= render 'public/genres/sidebar' %>
 
 <h1>商品一覧</h1><p>（全<%= @item_all.count %>件）</p>
 
 <table>
   <tbody>
-<% @items.each do |item| %>
-<tr>
-  <td>
-    <%= link_to public_item_path(item.id) do %>
-      <%= image_tag item.get_image(400,200) %>
-    <% end %>
-  </td>
-  <td><%= item.name %></td>
-  <td>¥<%= item.price.to_s(:delimited) %></td>
-</tr>
-<% end %>
+    <tr>
+      <% @items.each do |item| %>
+      <td>
+        <%= link_to public_item_path(item.id) do %>
+          <%= image_tag item.get_image(400,200) %>
+        <% end %></br>
+        <%= item.name %></br>
+        ¥<%= item.price.to_s(:delimited) %>
+      </td>
+      <% end %>
+    </tr>
   </tbody>
 </table>
 

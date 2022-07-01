@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+
+
   root to: "public/homes#top"
   get "/about" => "public/homes#about", as: "about"
 
@@ -25,6 +27,8 @@ Rails.application.routes.draw do
     resources :addresses, only: [:index,:create, :edit, :update, :destroy]
   # 以下、items
     resources :items, only: [:index, :show]
+  # 以下、genres
+    resources :genres, only: [:show]
   # 以下、cart_items
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :cart_items, only: [:index, :create, :update, :destroy]
@@ -43,6 +47,12 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
   # 以下、customers
     resources :customers, only: [:index, :show, :edit, :update]
+  # 以下、homes(注文履歴一覧)
+    get '/' => 'homes#top'
+  # 以下、orders（顧客別注文履歴一覧、注文履歴詳細、注文ステータス・着手状況の更新）
+    resources :orders, only: [:index, :show, :update]
+  # 以下、order_details（製作ステータスの更新）
+    patch 'order_details' => 'order_details#update'
 
   end
 

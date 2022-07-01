@@ -25,11 +25,11 @@ class Public::OrdersController < ApplicationController
 
       # 以下、view/new　で定義した address_number（２）＝「登録済住所から選択」　の処理
       elsif params[:order][:address_number] == "2"
-        # 選択した住所を　registered_address　へ格納し、@orderへ渡す
-        registered_address = Address.find(params[:order][:address_id])
-        @order.postal_code = registered_address.postal_code
-        @order.address = registered_address.address
-        @order.name = registered_address.name
+        # 選択した住所を　@address　へ格納し、@orderへ渡す
+        @address = Address.find(params[:order][:address_id])
+        @order.postal_code = @address.postal_code
+        @order.address = @address.address
+        @order.name = @address.name
 
       # 以下、view/new　で定義した address_number（３）＝「新しいお届け先」　の処理
       elsif params[:order][:address_number] == "3"
@@ -86,15 +86,6 @@ class Public::OrdersController < ApplicationController
   end
 
 end
-
-
-# 以下、Orderのカラムまとめ
-  #  customer_id＝会員ID、posta_code＝郵便番号、address＝住所、name＝宛名、shipping_cost＝送料、
-  #  total_payment＝請求額、payment_method＝支払方法、status＝受注ステータス
-
-# 以下、OrderDetailのカラムまとめ
-  #  item_id＝商品ID、order_id＝注文ID
-  #  price＝購入時価格（税込）、amount＝数量、making_status＝製作ステータス
 
 
 
