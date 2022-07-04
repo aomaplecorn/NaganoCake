@@ -1,30 +1,56 @@
-<h1>Admin::Customers#edit</h1>
+<div class="container">
+  <div class="row">
+    <h4 class="d-flex align-items-center m-3" style="background-color: #EEEEEE;"><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</h4>
+  </div>
 
-<div>
+
+<table class="table table-borderless">
 <%= form_with model: [:admin,@customer] do |f| %>
-<p>会員ID
-<%= @customer.id %></p>
-<p>氏名
-<%= f.text_field :last_name %>
-<%= f.text_field :first_name %></p>
-<p>フリガナ
-<%= f.text_field :last_name_kana %>
-<%= f.text_field :first_name_kana %></p>
-<p>郵便番号
-<%= f.text_field :postal_code %></p>
-<p>住所
-<%= f.text_field :address %></p>
-<p>電話番号
-<%= f.telephone_field :telephone_number %></p>
-<p>メールアドレス
-<%= f.email_field :email %></p>
-<p>会員ステータス
-<%= f.radio_button :is_deleted, false %><%= f.label :is_deleted_1, "有効" %>
-<%= f.radio_button :is_deleted, true %><%= f.label :is_deleted_2, "無効" %></p>
-
-<%= f.submit "変更を保存" %>
-
+    <tr>
+        <td>会員ID</td>
+        <td><%= @customer.id %></td>
+    </tr>
+    <tr>
+        <td>氏名</td>
+        <td><%= f.text_field :last_name %></td>
+        <td><%= f.text_field :first_name %></td>
+    </tr>
+    <tr>
+        <td>フリガナ</td>
+        <td><%= f.text_field :last_name_kana %></td>
+        <td><%= f.text_field :first_name_kana %></td>
+    </tr>
+    <tr>
+        <td>郵便番号</td>
+        <td><%= f.text_field :postal_code %></td>
+    </tr>
+    <tr>
+        <td>住所</td>
+        <td><%= f.text_field :address %></td>
+    </tr>
+    <tr>
+        <td>電話番号</td>
+        <td><%= f.telephone_field :telephone_number %></td>
+    </tr>
+    <tr>
+        <td>メールアドレス</td>
+        <td><%= f.email_field :email %></td>
+    </tr>
+    <tr>
+        <td>会員ステータス</td>
+        <td>
+            <%= f.radio_button :is_deleted, false %><%= f.label :is_deleted_1, "有効" %>
+            <%= f.radio_button :is_deleted, true %><%= f.label :is_deleted_2, "無効" %>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="1"></td>
+        <td><%= f.submit "変更を保存", class: "btn btn-success" %></td>
+    </tr>
 <% end %>
+</table>
+
+
 </div>
 
 

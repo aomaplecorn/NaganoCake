@@ -1,29 +1,33 @@
-<h1>Public::Genres#show</h1>
-
-
-<div class="item-index-box">
-
-    <!-- ジャンル選択のサイドバー -->
+<div class="container">
+  <div class="row">
+    <!-- ジャンル検索のサイドバー -->
     <%= render "sidebar" %>
-    <!-- ジャンル選択のサイドバー -->
-    <div class="item-index">
-    <h3><%= @genre.name %>一覧</h3><p>（全<%= @genre.items.count %>件）</p>
-        <table>
-          <tbody>
-            <tr class="item-box">
-              <% @genre.items.each do |item| %>
-                <td class="item">
+
+    <div class="col-10">
+      <div class="item-index-box">
+        <div class="item-index">
+          <h3><%= @genre.name %>一覧</h3><p>（全<%= @genre.items.count %>件）</p>
+            <table>
+              <tbody>
+                <tr class="item-box d-flex align-content-between flex-wrap">
+                  <% @genres.each do |item| %>
+                  <td class="item m-3">
                     <%= link_to public_item_path(item.id) do %>
                       <%= image_tag item.get_image(400,200) %><br>
                       <%= item.name %><br>
                       ¥<%= item.add_tax_price.round.to_s(:delimited) %>
                     <% end %>
-                </td>
-              <% end %>
-            </tr>
-          </tbody>
-        </table>
+                  </td>
+                  <% end %>
+                </tr>
+              </tbody>
+            </table>
+
+
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
-
+<div class="d-flex align-items-center justify-content-center" ><%= paginate @genres %></div>

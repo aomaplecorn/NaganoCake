@@ -1,9 +1,11 @@
-<h1>Public::Orders#index</h1>
-
-<h1>注文履歴一覧</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+    <h4 class="d-flex align-items-center m-4" style="background-color: #EEEEEE;">注文履歴一覧</h4>
+  </div>
 
 <table border="1">
-    <thead>
+    <thead style="background-color: #EEEEEE;">
         <tr>
             <td>注文日</td>
             <td>配送先</td>
@@ -33,10 +35,17 @@
             <!--「支払金額」合計を表示-->
             <td><%= order.total_payment.to_s(:delimited) %>円</td>
             <!--現在のステータス（入金・発送など）を表示-->
-            <td><%= order.status %></td>
-            <td><%= link_to "表示する", public_order_path(order.id) %></td>
+            <td><%= order.status_i18n %></td>
+            <td><%= link_to "表示する", public_order_path(order.id), class: "btn btn-primary" %></td>
         </tr>
         <% end %>
     </tbody>
 </table>
+
+
+</div>
+
+
+
+
 

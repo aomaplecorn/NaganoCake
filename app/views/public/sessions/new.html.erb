@@ -1,32 +1,40 @@
-<h2>ログイン</h2>
-
-<h4>会員の方はこちらからログイン</h4>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    メールアドレス
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container">
+  <div class="row">
+    <h4 class="d-flex align-items-center m-5" style="background-color: #EEEEEE;">ログイン</h4>
+  </div>
+  <div class="row">
+    <h6 class="d-flex align-items-center m-3 ml-5" style="background-color: #EEEEEE;">会員の方はこちらからログイン</h6>
   </div>
 
-  <div class="field">
-    パスワード
-    <%= f.password_field :password, autocomplete: "current-password" %>
+  <div class="row">
+    <table class="d-flex align-items-center justify-content-center my-auto mx-auto" style="height:200px;">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <tr>
+        <div class="field">
+          <td>メールアドレス</td>
+          <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+        </div>
+      </tr>
+      <tr>
+        <div class="field">
+          <td>パスワード</td>
+          <td><%= f.password_field :password, autocomplete: "current-password" %></td>
+        </div>
+      </tr>
+      <tr>
+        <td></td>
+        <td><div class="actions pt-4">
+          <%= f.submit "ログイン", class: "btn btn-primary" %>
+        </div></td>
+      </tr>
+      <% end %>
+    </table>
   </div>
 
-  <!--<a% if devise_mapping.rememberable? %>-->
-  <!--  <div class="field">-->
-  <!--    <a%= f.check_box :remember_me %>-->
-  <!--    <a%= f.label :remember_me %>-->
-  <!--  </div>-->
-  <!--<a% end %>-->
+<div class="row">
+  <h6 class="d-flex align-items-center m-3 ml-5" style="background-color: #EEEEEE;">会員登録がお済みでない方</h6>
+</div>
+<p class="d-flex align-items-center justify-content-center my-auto mx-auto">
+  <%= link_to "こちら", '/customers/sign_up' %>から新規登録を行ってください
+</p>
 
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
-
-<h4>会員登録がお済みでない方</h4>
-<p><%= link_to "こちら", '/customers/sign_up' %>から新規登録を行ってください</p>
-
-<!--<h4>会員登録がお済みでない方</h4>-->
-<!--render "public/shared/links"-->

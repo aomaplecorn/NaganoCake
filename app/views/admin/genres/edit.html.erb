@@ -1,11 +1,17 @@
-<h1>Admin::Genres#edit</h1>
-<h4>ジャンル編集</h4>
+<div class="container">
+  <div class="row">
+    <h4 class="m-3" style="background-color: #EEEEEE;">ジャンル編集</h4>
+  </div>
 
-<td>ジャンル名</td>
+  <div class="row">
+    <strong class="m-4 p-3">ジャンル名</strong>
+    <%= form_with model: [:admin,@genre] do |f| %>
+    <div class="m-3 p-3">
+      <%= f.text_field :name %>
+      <span class="m-3 p-5"><%= f.submit "変更を保存", class: "btn btn-success" %></span>
+    </div>
+    <% end %>
 
-<%= form_with model: [:admin,@genre] do |f| %>
-  <%= f.text_field :name %>
-  <%= f.submit "変更を保存" %>
-<% end %>
-
+  </div>
+</div>
 

@@ -1,29 +1,29 @@
-<h1>Public::Homes#top</h1>
-
-<!--ジャンル検索＃商品一覧へ飛ぶ-->
-<div class="sidebar">
+<div class="container">
+  <div class="row">
+<!--ジャンル検索　＃商品一覧（ジャンル別）へ飛ぶ-->
   <%= render 'public/genres/sidebar' %>
-</div>
+
+<div class="col-10">
 <!--画面中央-->
-<div>
-  <p>
-    ようこそ、ながのCAKEへ！</br>
-    このサイトは、ケーキ販売のECサイトになります。</br>
-    会員でない方も商品の閲覧はできますが、</br>
-    購入には会員登録が必要になります。
-  </p>
-</div>
+  <div class="main-top d-flex align-items-center justify-content-center" style="height:400px;">
+    <p class="bg-white p-3"><strong>
+      ようこそ、ながのCAKEへ！</br>
+      このサイトは、ケーキ販売のECサイトになります。</br>
+      会員でない方も商品の閲覧はできますが、</br>
+      購入には会員登録が必要になります。
+    </strong></p>
+  </div>
 
 <!--新着商品、商品名、値段　＃商品詳細へ飛ぶ-->
 <div>
   <h1>新着商品</h1>
-    <table>
+    <table class="table">
       <tbody>
         <tr>
           <% @items.order(created_at: :desc).each do |item| %>
-          <td>
+          <td class="m-3">
               <%= link_to public_item_path(item.id) do %>
-                <%= image_tag item.get_image(100,100) %></br>
+                <%= image_tag item.get_image(200,200) %></br>
                 <%= item.name %></br>
                 ¥<%= item.price.to_s(:delimited) %>
               <% end %>
@@ -34,6 +34,10 @@
     </table>
 </div>
 
-<div><%= link_to "全ての商品を見る >", public_items_path %></div>
+<div class="d-flex justify-content-end mr-3 mb-3"><%= link_to "全ての商品を見る >", public_items_path %></div>
 
+</div>
+<!--container + row-->
+  </div>
+</div>
 

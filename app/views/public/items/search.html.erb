@@ -3,26 +3,29 @@
     <%= render 'public/genres/sidebar' %>
 
     <div class="col-10">
-      <h1>商品一覧</h1><p>（全<%= @item_all.count %>件）</p>
+      <div class="search-list">
+        <h3>検索結果：<%= @keyword %></h3>
         <table>
           <tbody>
-            <div>
             <tr class="d-flex align-content-between flex-wrap">
-              <% @items.each do |item| %>
-              <td class="m-3">
+              <% @search_items.each do |item| %>
+              <td class="d-flex justify-content-center m-3">
                 <%= link_to public_item_path(item.id) do %>
-                  <%= image_tag item.get_image(400,200) %>
-                <% end %></br>
+                  <%= image_tag item.get_image(400,200) %></br>
                   <%= item.name %></br>
                   ¥<%= item.price.to_s(:delimited) %>
+                <% end %>
               </td>
               <% end %>
             </tr>
-            </div>
           </tbody>
         </table>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="d-flex align-items-center justify-content-center" ><%= paginate @items %></div>
+<div class="d-flex align-items-center justify-content-center" ><%= paginate @search_items %></div>
+
+
+

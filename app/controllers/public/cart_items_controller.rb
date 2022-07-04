@@ -1,4 +1,5 @@
 class Public::CartItemsController < ApplicationController
+  before_action :authenticate_customer!
   def index
     @cart_items = current_customer.cart_items
     @cart_item = CartItem.new
@@ -16,10 +17,13 @@ class Public::CartItemsController < ApplicationController
       @cart_item.save
       redirect_to public_cart_items_path
     # カート内に同じアイテムがある場合、レコードの"数量"を更新する
-    else
+    elsif @cart_item.amount != nil
       @existing_cart_item.amount += @cart_item.amount
       @existing_cart_item.save
       redirect_to public_cart_items_path
+    else
+    # 選択肢を間違えた時＋「個数選択」を選択した場合
+      redirect_to public_item_path(@cart_item.item_id) # 'public/items/index'
     end
   end
 

@@ -1,10 +1,11 @@
-<h1>Admin::Customers#index</h1>
+<div class="container">
+  <div class="row">
+    <h4 class="d-flex align-items-center m-3" style="background-color: #EEEEEE;">会員一覧</h4>
+  </div>
 
-<h3>会員一覧</h3>
-
-<table>
+<table class="table">
   <thead>
-    <tr>
+    <tr style="background-color: #EEEEEE;">
       <td>会員ID</td>
       <td>氏名</td>
       <td>メールアドレス</td>
@@ -12,25 +13,26 @@
     </tr>
   </thead>
   <tbody>
-<% @customers.each do |customers| %>
-  <tr>
-    <td><%= customers.id %>
-    <td>
-      <%= link_to(admin_customer_path(customers.id)) do %>
-        <%= customers.last_name %><%= customers.first_name %>
-      <% end %>
-    </td>
-    <td><%= customers.email %></td>
-    <td>
-      <% if customers.is_deleted == false %>
-        <%= "有効" %>
-      <% else %>
-        <%= "退会" %>
-      <% end %>
-    </td>
-  </tr>
-<% end %>
+    <% @customers.each do |customers| %>
+    <tr>
+      <td><%= customers.id %>
+      <td>
+        <%= link_to(admin_customer_path(customers.id)) do %>
+          <span class="text-dark"><%= customers.last_name %><%= customers.first_name %></span>
+        <% end %>
+      </td>
+      <td><%= customers.email %></td>
+      <td>
+        <% if customers.is_deleted == false %>
+          <div class="text-success"><%= "有効" %></div>
+        <% else %>
+          <div class="text-secondary"><%= "退会" %></div>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
   </tbody>
 </table>
 
-<%= paginate @customers %>
+</div>
+<div class="d-flex align-items-center justify-content-center" ><%= paginate @customers %></div>

@@ -1,30 +1,54 @@
-<h1>Admin::Customers#show</h1>
+<div class="container">
+  <div class="row">
+    <h4 class="d-flex align-items-center m-3" style="background-color: #EEEEEE;"><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</h4>
+  </div>
 
-<h3><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</h3>
+<table class="table table-borderless">
+  <tr>
+    <td>会員ID</td>
+    <td><%= @customer.id %></td>
+  </tr>
+  <tr>
+    <td>氏名</td>
+    <td><%= @customer.last_name %>　<%= @customer.first_name %></td>
+  </tr>
+  <tr>
+    <td>フリガナ</td>
+    <td><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></td>
+  </tr>
+  <tr>
+    <td>郵便番号</td>
+    <td><%= @customer.postal_code %></td>
+  </tr>
+  <tr>
+    <td>住所</td>
+    <td><%= @customer.address %></td>
+  </tr>
+  <tr>
+    <td>電話番号</td>
+    <td><%= @customer.telephone_number %></td>
+  </tr>
+  <tr>
+    <td>メールアドレス</td>
+    <td><%= @customer.email %></td>
+  </tr>
+  <tr>
+    <td>会員ステータス</td>
+    <td>
+      <% if @customer.is_deleted == false %>
+        <div class="text-success"><%= "有効" %></div>
+      <% else %>
+        <div class="text-secondary"><%= "退会" %></div>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="1"></td>
+    <td><%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success" %></td>
+    <td><%= link_to "注文履歴一覧を見る", '/admin', class: "btn btn-primary" %></td>
+  </tr>
+</table>
+</div>
 
 
-<p>会員ID
-<%= @customer.id %></p>
-<p>氏名
-<%= @customer.last_name %>　<%= @customer.first_name %></p>
-<p>フリガナ
-<%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></p>
-<p>郵便番号
-<%= @customer.postal_code %></p>
-<p>住所
-<%= @customer.address %></p>
-<p>電話番号
-<%= @customer.telephone_number %></p>
-<p>メールアドレス
-<%= @customer.email %></p>
-<p>会員ステータス
-  <% if @customer.is_deleted == false %>
-    <%= "有効" %>
-  <% else %>
-    <%= "退会" %>
-  <% end %>
-</p>
-
-<%= link_to "編集する", edit_admin_customer_path(@customer.id) %>
-<!--<a%= link_to "注文履歴一覧を見る", %>-->
 

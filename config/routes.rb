@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   root to: "public/homes#top"
   get "/about" => "public/homes#about", as: "about"
 
+
   devise_for :customers, skip: [:passwords], controllers: {
     registrations: 'public/registrations',
     sessions: 'public/sessions'
-
   }
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   }
 
   namespace :public, path: "" do
-
   # 以下、customers
     get 'customers/edit' => 'customers#edit', as: 'edit_mypage'
     patch 'customers' => 'customers#update'
@@ -27,6 +26,7 @@ Rails.application.routes.draw do
     resources :addresses, only: [:index,:create, :edit, :update, :destroy]
   # 以下、items
     resources :items, only: [:index, :show]
+    get '/search' => 'items#search', as: 'search'
   # 以下、genres
     resources :genres, only: [:show]
   # 以下、cart_items
@@ -36,11 +36,12 @@ Rails.application.routes.draw do
     get 'orders/complete' => 'orders#complete', as: 'complete'
     resources :orders, only: [:new, :create, :index, :show]
     post 'orders/confirm' => 'orders#confirm', as: 'confirm'
-
   end
 
-  namespace :admin do
 
+
+
+  namespace :admin do
   # 以下、genres
     resources :genres, only: [:index,:create, :edit, :update]
   # 以下、items
@@ -52,12 +53,8 @@ Rails.application.routes.draw do
   # 以下、orders（顧客別注文履歴一覧、注文履歴詳細、注文ステータス・着手状況の更新）
     resources :orders, only: [:index, :show, :update]
   # 以下、order_details（製作ステータスの更新）
-    patch 'order_details' => 'order_details#update'
-
+    resources :order_details, only: [:update]
   end
-
-
-
 
 
 end

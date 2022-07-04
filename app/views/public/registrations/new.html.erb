@@ -1,67 +1,79 @@
-<h2>新規会員登録</h2>
+<div class="container">
+  <div class="row">
+    <h4 class="d-flex align-items-center m-5" style="background-color: #EEEEEE;">新規会員登録</h4>
+  </div>
 
+
+
+  <div class="row">
+    <table class="d-flex align-items-center justify-content-center my-auto mx-auto" style="height:300px;">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
+  <%= render "/devise/shared/error_messages", resource: resource %>
+      <tr>
+        <th colspan="3"></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr class="field">
+        <td>名前</td>
+        <td>（姓）</td>
+        <td><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %></td>
+        <td>（名）</td>
+        <td><%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %></td>
+      </tr>
+      <tr class="field">
+        <td>フリガナ</td>
+        <td>（セイ）</td>
+        <td><%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %></td>
+        <td>（メイ）</td>
+        <td><%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana" %></td>
+      </tr>
+      <tr class="field">
+        <td>メールアドレス</td>
+        <td colspan="1"></td>
+        <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+      </tr>
+      <tr class="field">
+        <td>郵便番号（ハイフンなし）</td>
+        <td colspan="1"></td>
+        <td><%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %></td>
+      </tr>
+      <tr class="field">
+        <td>住所</td>
+        <td colspan="1"></td>
+        <td><%= f.text_field :address, autofocus: true, autocomplete: "address" %></td>
+      </tr>
+      <tr class="field">
+        <td>電話番号（ハイフンなし）</td>
+        <td colspan="1"></td>
+        <td><%= f.telephone_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %></td>
+      </tr>
+      <tr class="field">
+        <td>パスワード（６文字以上）</td>
+        <td colspan="1"></td>
+        <td><%= f.password_field :password, autocomplete: "new-password" %></td>
+      </tr>
+      <tr class="field">
+        <td>パスワード（確認用）</td>
+        <td colspan="1"></td>
+        <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
+      </tr>
+      <tr class="actions">
+        <td colspan="2"></td>
+        <td><%= f.submit "新規会員登録", class: "btn btn-success" %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
-<table>
-  <div class="field">
-    名前
-    （姓）
-    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
-    （名）
-    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
-  </div>
-
-  <div class="field">
-    フリガナ
-    （セイ）
-    <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %>
-    （メイ）
-    <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana" %>
-  </div>
-
-  <div class="field">
-    <!--<a%= f.label :email %><br />-->
-    メールアドレス
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    郵便番号（ハイフンなし）
-    <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
-  </div>
-
-  <div class="field">
-    住所
-    <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
-  </div>
-
-  <div class="field">
-    電話番号（ハイフンなし）
-    <%= f.telephone_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
-  </div>
-
-  <div class="field">
-    <!--<a%= f.label :password %>-->
-    パスワード（６文字以上）
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <!--<a%= f.label :password_confirmation %><br />-->
-    パスワード（確認用）
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "新規会員登録" %>
-  </div>
-<% end %>
-
-</table>
-
-<h4>既に登録済みの方</h4>
-<p><%= link_to "こちら", '/customers/sign_in' %>からログインしてください。</p>
+<div class="row">
+  <h4 class="d-flex align-items-center m-3 ml-5" style="background-color: #EEEEEE;">既に登録済みの方</h4>
+</div>
+<p class="d-flex align-items-center justify-content-center my-auto mx-auto">
+  <%= link_to "こちら", '/customers/sign_in' %>からログインしてください。
+</p>
 
 
 

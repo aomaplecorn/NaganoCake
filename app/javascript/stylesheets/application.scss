@@ -1,0 +1,20 @@
+
+
+
+
+.main-top {
+  background-image: url(/assets/shortcake2.webp);
+  height: 300px;
+  background-size: cover;
+}
+
+.main-about {
+  background-image: url(/assets/cake2.webp);
+  height: 300px;
+  width: 500px;
+  background-size: cover;
+}
+
+@import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+

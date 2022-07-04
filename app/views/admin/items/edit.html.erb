@@ -1,23 +1,48 @@
-<h1>Admin::Items#edit</h1>
+<div class="container">
+  <div class="row">
+    <h4 class="d-flex align-items-center m-3" style="background-color: #EEEEEE;">商品編集</h4>
+  </div>
 
-<h4>商品編集</h4>
+<table class="d-flex align-items-center justify-content-center my-auto mx-auto">
+  <div>
+    <%= form_with model: [:admin, @item] do |f| %>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+    <tr>
+      <td class="form_control pt-3 mt-3">商品画像</td>
+      <td class="form_control pt-3 mt-3"><%= f.file_field :image, accept: "image/*" %></td>
+    </tr>
+    <tr>
+      <td class="form_control pt-3 mt-3">商品名</td>
+      <td class="form_control pt-3 mt-3"><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td class="form_control pt-3 mt-3">商品説明</td>
+      <td class="form_control pt-3 mt-3"><%= f.text_area :introduction %></td>
+    </tr>
+    <tr>
+      <td class="form_control pt-3 mt-3">ジャンル</td>
+      <td class="form_control pt-3 mt-3"><%= f.collection_select :genre_id, Genre.all, :id, :name %></td>
+    </tr>
+    <tr>
+      <td class="form_control pt-3 mt-3">税抜価格</td>
+      <td class="form_control pt-3 mt-3"><%= f.number_field :price %>円</td>
+    </tr>
+    <tr>
+      <td class="form_control pt-3 mt-3">販売ステータス</td>
+      <td class="form_control pt-3 mt-3"><%= f.radio_button :is_active, true %><%= f.label :is_active_1, "販売中" %>
+          <%= f.radio_button :is_active, false %><%= f.label :is_active_2, "販売停止中" %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="form_control pt-3 mt-3"><%= f.submit '変更を保存', class: "btn btn-success" %></td>
+    </tr>
+  </div>
+</div>
 
-<%= form_with model: [:admin, @item] do |f| %>
-<li>商品画像
-  <%= f.file_field :image, accept: 'image/*' %></li>
-<li>商品名
-  <%= f.text_field :name %></li>
-<li>商品説明
-  <%= f.text_area :introduction %></li>
-<li>ジャンル
-  <%= f.collection_select :genre_id, Genre.all, :id, :name %></li>
-<li>税抜価格
-  <%= f.number_field :price %>円</li>
-<li>販売ステータス
-  <%= f.radio_button :is_active, true %><%= f.label :is_active_1, "販売中" %>
-  <%= f.radio_button :is_active, false %><%= f.label :is_active_2, "販売停止中" %></li>
-
-  <%= f.submit '変更を保存' %>
 <% end %>
+</div>
+</table>
 
 

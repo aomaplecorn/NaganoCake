@@ -23,7 +23,7 @@ class Customer < ApplicationRecord
 
 
   def my_address
-    '〒' + postal_code + '' + address
+    '〒' + postal_code + ' ' + address
   end
 
 end

@@ -1,0 +1,9 @@
+<!--検索フォーム（部分テンプレート）-->
+
+<div class="search-form" style="position: absolute; bottom: 5px; right: 5px;">
+  <%= form_with url: public_search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword, value: @keyword %>
+    <%= f.submit "検索", class: "btn btn-primary"%>
+  <% end %>
+</div>
+

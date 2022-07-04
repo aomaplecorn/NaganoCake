@@ -1,63 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <title>Naganocake</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1 ">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand">
+        <div class="container">
+          <%= link_to '/' do %>
+            <div class="navbar-brand p-4 text-dark">ながのCAKE</div>
+          <% end %>
+          <% if customer_signed_in? %>
+            <div><%= flash[:notice]  = "ようこそ、#{current_customer.last_name}さん！" %></div>
+          <% end %>
+            <div class="row">
+              <ul class="navbar-nav" style="position: absolute; top: 10px; right: 5px;">
+<!--adminのログイン後メニュー-->
     <% if admin_signed_in? %>
-    <li>
-    <%= link_to "商品一覧", admin_items_path %>
-    </li>
-    <li>
-    <%= link_to "会員一覧", admin_customers_path %>
-    </li>
-    <li>
-    <%= link_to "注文履歴一覧", '/admin' %>
-    </li>
-    <li>
-    <%= link_to "ジャンル一覧", admin_genres_path %>
-    </li>
-    <li>
-    <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-    </li>
-
+    <li class="nav-item" style="margin-right: 30px;"><%= link_to "商品一覧", admin_items_path, class: 'btn btn-light'  %></li>
+    <li class="nav-item" style="margin-right: 30px;"><%= link_to "会員一覧", admin_customers_path, class: 'btn btn-light'  %></li>
+    <li class="nav-item" style="margin-right: 30px;"><%= link_to "注文履歴一覧", '/admin', class: 'btn btn-light'  %></li>
+    <li class="nav-item" style="margin-right: 30px;"><%= link_to "ジャンル一覧", admin_genres_path, class: 'btn btn-light'  %></li>
+    <li class="nav-item" style="margin-right: 30px;"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'btn btn-light'  %></li>
+<!--customerのログイン後メニュー-->
     <% elsif customer_signed_in? %>
-    <%= flash[:notice]  = "ようこそ、#{current_customer.last_name}さん！" %>
-    <li>
-    <%= link_to "マイページ", public_mypage_path %>
-    </li>
-    <li>
-    <%= link_to "商品一覧", public_items_path %>
-    </li>
-    <li>
-    <%= link_to "カート", public_cart_items_path %>
-    </li>
-    <li>
-    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-    </li>
-
+    <li class="nav-item" style="margin-right: 30px;"><%= link_to "マイページ", public_mypage_path , class: 'btn btn-light' %></li>
+    <li class="nav-item" style="margin-right: 30px;"><%= link_to "商品一覧", public_items_path, class: 'btn btn-light' %></li>
+    <li class="nav-item" style="margin-right: 30px;"><%= link_to "カート", public_cart_items_path, class: 'btn btn-light' %></li>
+    <li class="nav-item" style="margin-right: 10px;"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'btn btn-light' %></li>
+<!--admin、customerのログイン前メニュー-->
     <% else %>
-    <li>
-      <%= link_to "About", about_path %>
-    </li>
-    <li>
-      <%= link_to "商品一覧", public_items_path %>
-    </li>
-    <li>
-      <%= link_to "新規登録", '/customers/sign_up' %>
-    </li>
-    <li>
-      <%= link_to "ログイン", '/customers/sign_in' %>
-    </li>
+    <li class="nav-item" style="margin-right: 30px;"><%= link_to "About", about_path, class: 'btn btn-light'  %></li>
+    <li class="nav-item" style="margin-right: 30px;"><%= link_to "商品一覧", public_items_path, class: 'btn btn-light'  %></li>
+    <li class="nav-item" style="margin-right: 30px;"><%= link_to "新規登録", '/customers/sign_up', class: 'btn btn-light'  %></li>
+    <li class="nav-item" style="margin-right: 30px;"><%= link_to "ログイン", '/customers/sign_in', class: 'btn btn-light'  %></li>
     <% end %>
+              </ul>
+            </div>
 
-    <%= yield %>
+<!--Item内のワード検索機能（部分一致）-->
+          <div><%= render 'public/items/search_list' %></div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="h-100">
+        <%= yield %>
+    </main>
+
+    <footer class="bg-dark pt-5 pb-4">
+    </footer>
   </body>
 </html>

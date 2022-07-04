@@ -1,12 +1,13 @@
 
-
-<strong>ジャンル検索</strong>
-<% genres = Genre.all %>
-<% genres.each do |genre| %>
-  <%= link_to public_genre_path(genre.id) do %>
-    <div><%= genre.name %></div>
+<div class="col-2">
+  <ul class="list-group mt-4"><strong class="list-group-item text-center">ジャンル検索</strong>
+  <% genres = Genre.all %>
+  <% genres.each do |genre| %>
+    <%= link_to public_genre_path(genre.id) do %>
+      <li class="list-group-item"><%= genre.name %></li>
+    <% end %>
   <% end %>
-<% end %>
-
+  </ul>
+</div>
 
 

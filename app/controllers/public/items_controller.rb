@@ -1,6 +1,6 @@
 class Public::ItemsController < ApplicationController
   def index
-    @items = Item.page(params[:page])
+    @items = Item.page(params[:page]).per(8)
     @item_all = Item.all
   end
 
@@ -8,4 +8,12 @@ class Public::ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @cart_item = CartItem.new
   end
+
+  def search
+    @items = Item.search(params[:keyword])
+    @search_items = @items.page(params[:page]).per(8)
+    @keyword = params[:keyword]
+    render :search
+  end
+
 end

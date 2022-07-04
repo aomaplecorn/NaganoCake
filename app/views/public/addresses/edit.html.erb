@@ -1,22 +1,24 @@
-<h1>Public::Addresses#edit</h1>
-
-<h3>配送先編集</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+    <h4 class="d-flex align-items-center m-4" style="background-color: #EEEEEE;">配送先編集</h4>
+  </div>
 
 <%= form_with model: [:public,@address] do |f| %>
-
-<p>郵便番号（ハイフンなし）
-  <%= f.text_field :postal_code %>
-</p>
-<p>住所
-  <%= f.text_field :address %>
-</p>
-<p>宛名
-  <%= f.text_field :name %>
-</p>
-
-<%= f.submit "変更内容を保存" %>
-
+<div class="row m-3">
+  <span class="col-sm-3 offset-sm-1">郵便番号（ハイフンなし）</span>
+  <span class="col-sm-auto"><%= f.text_field :postal_code %></span>
+</div>
+<div class="row m-3">
+  <span class="col-sm-3 offset-sm-1">住所</span>
+  <span class="col-sm-auto"><%= f.text_field :address %></span>
+</div>
+<div class="row m-3">
+  <span class="col-sm-3 offset-sm-1">宛名</span>
+  <span class="col-sm-auto"><%= f.text_field :name %></span>
+  <span class="offset-sm-2"><%= f.submit '変更内容を保存', class: "btn btn-success" %></span>
+</div>
 <% end %>
 
-
+</div>
 

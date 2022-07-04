@@ -1,41 +1,54 @@
-<h1>Public::Orders#new</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+    <h4 class="d-flex align-items-center m-4" style="background-color: #EEEEEE;">注文情報入力</h4>
+  </div>
 
-<h3>注文情報入力</h3>
+
 
 <%= form_with model: @order, url: '/orders/confirm', method: :post do |f| %>
-<strong>支払方法</strong>
-<div>
+<strong class="col-auto">支払方法</strong>
+<div class="offset-1">
     <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
     <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %></div>
-<div>
+<div class="offset-1">
     <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
     <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %></div>
 
-<strong>お届け先</strong>
+<strong class="col-auto">お届け先</strong>
 <!--ユーザー本人の住所-->
-    <div>
+    <div class="offset-1">
         <%= f.radio_button :address_number, 1 %>
         <%= f.label :address_number_1, "ご自身の住所" %>
-        </div>
-    <div>
+    </div>
+    <div class="offset-1 col-auto">
         <%= current_customer.my_address %></div>
+    <div class="offset-1 col-auto">
+        <%= current_customer.last_name + current_customer.first_name %></div>
 <!--登録された住所を選択-->
-    <div>
+    <div class="offset-1">
         <%= f.radio_button :address_number, 2 %>
         <%= f.label :address_number_2, "登録済住所から選択" %></div>
-        <%= f.select :address_id, options_from_collection_for_select(current_customer.addresses.all, :id, :address_display) %>
+    <div class="offset-1 col-auto">
+        <%= f.select :address_id, options_from_collection_for_select(current_customer.addresses.all, :id, :address_display) %></div>
 <!--新しい住所を追加する場合-->
-    <div>
+    <div class="offset-1">
         <%= f.radio_button :address_number, 3 %>
         <%= f.label :address_number_3, "新しいお届け先" %></div>
-            <p><%= f.label :postal_code, "郵便番号（ハイフンなし）" %>
-                <%= f.text_field :postal_code %></p>
-            <p><%= f.label :address, "住所" %>
-                <%= f.text_field :address %></p>
-            <p><%= f.label :name , "宛名" %>
-                <%= f.text_field :name %></p>
+            <div class="row">
+                <span class="col-sm-3 offset-sm-1"><%= f.label :postal_code, "郵便番号（ハイフンなし）" %></span>
+                <span class="col-auto"><%= f.text_field :postal_code %></span>
+            </div>
+            <div  class="row">
+                <span class="col-sm-3 offset-sm-1"><%= f.label :address, "住所" %></span>
+                <span class="col-auto"><%= f.text_field :address %></span>
+            </div>
+            <div class="row">
+                <span class="col-sm-3 offset-sm-1"><%= f.label :name, "宛名" %></span>
+                <span class="col-auto"><%= f.text_field :name %></span>
+            </div>
 
-<%= f.submit "確認画面へ進む" %>
+<div class=" d-flex align-items-center justify-content-center text-center mt-3"><%= f.submit "確認画面へ進む", class: "btn btn-primary" %></div>
 
 <% end %>
 
